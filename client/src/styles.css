@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #222;
+    color: white;
+  }
+  
+  .header a {
+    color: white;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+  
+  .main {
+    height: 100vh;
+    background: url('H:/uni/111DIPLOM/client/public/background.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .main .overlay {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .section {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .section h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .news-item {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  
+  .news-img img {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 1rem;
+    border-radius: 8px;
+  }
+  
+  .news-text h3 {
+    margin-top: 0;
+  }
+  
+  .gallery-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .gallery-grid img {
+    width: 30%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .footer .social-links a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+  

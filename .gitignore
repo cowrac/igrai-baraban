@@ -1,0 +1,26 @@
+# Node.js
+node_modules/
+.env
+dist/
+build/
+npm-debug.log*
+
+# Logs
+logs/
+*.log
+
+# macOS
+.DS_Store
+
+# Images generated dynamically
+server/qr_images/
+
+# VS Code settings (если не хочешь делиться)
+.vscode/
+
+# React build
+client/build/
+
+# OS / Editor junk
+Thumbs.db
+.idea/
