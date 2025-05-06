@@ -4,6 +4,7 @@ const BuyCertificateModal = ({ onClose }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState(null);
+  const [certUrl, setCertUrl] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,15 +19,11 @@ const BuyCertificateModal = ({ onClose }) => {
         body: JSON.stringify({ name, phone }),
       });
 
-      if (!response.ok) {
-        throw new Error("Ошибка при отправке");
-      }
+      if (!response.ok) throw new Error("Ошибка при отправке");
 
       const data = await response.json();
+      setCertUrl(data.url);
       setStatus("success");
-
-      alert(`Сертификат создан! ID: ${data.id}`);
-      onClose(); // Закрываем модалку после успеха
     } catch (error) {
       console.error(error);
       setStatus("error");
@@ -62,8 +59,18 @@ const BuyCertificateModal = ({ onClose }) => {
             {status === "loading" ? "Отправка..." : "Отправить"}
           </button>
           <button type="button" onClick={onClose}>Отмена</button>
-          {status === "error" && <p className="error">Произошла ошибка, попробуйте ещё раз.</p>}
         </form>
+
+        {status === "success" && certUrl && (
+          <div className="success-message">
+            <p>Сертификат успешно создан!</p>
+            <a href={certUrl} download>
+              ⬇️ Скачать PDF
+            </a>
+          </div>
+        )}
+
+        {status === "error" && <p className="error">Произошла ошибка, попробуйте ещё раз.</p>}
       </div>
     </div>
   );
