@@ -1,0 +1,72 @@
+.admin-login,
+.admin-panel {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.admin-login input,
+.admin-login button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.panel-links a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #0077cc;
+}
+
+.panel-links a:hover {
+  text-decoration: underline;
+}
+
+/* src/Admin.css */
+.admin-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .admin-panel th,
+  .admin-panel td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .admin-panel button {
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .admin-panel button:hover {
+    background-color: #e53935;
+  }
+
+  .form-inline {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .form-inline input {
+    padding: 6px;
+    width: 150px;
+  }
+  

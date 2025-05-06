@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const BuyCertificateModal = ({ onClose }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
   const [certUrl, setCertUrl] = useState(null);
 
@@ -16,7 +17,7 @@ const BuyCertificateModal = ({ onClose }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone }),
+        body: JSON.stringify({ name, phone, email }),
       });
 
       if (!response.ok) throw new Error("Ошибка при отправке");
@@ -41,6 +42,15 @@ const BuyCertificateModal = ({ onClose }) => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Email:
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </label>

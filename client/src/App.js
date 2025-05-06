@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles.css";
+
 import Header from "./components/Header";
 import Main from "./components/Main";
 import About from "./components/About";
@@ -8,7 +10,11 @@ import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import BuyCertificateModal from "./components/BuyCertificateModal";
 
-function App() {
+import AdminLogin from "./pages/AdminLogin";
+import AdminPanel from "./pages/AdminPanel";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+function HomePage() {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -21,6 +27,25 @@ function App() {
       <Footer />
       {showModal && <BuyCertificateModal onClose={() => setShowModal(false)} />}
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/panel"
+          element={
+            <ProtectedRoute>
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

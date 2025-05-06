@@ -9,7 +9,7 @@ const Jimp = require('jimp');
 const { PDFDocument, rgb } = require('pdf-lib');
 
 router.post('/create', async (req, res) => {
-  const { name, phone } = req.body;
+  const { name, phone, email } = req.body;
   const qrId = uuidv4();
 
   try {
@@ -55,8 +55,8 @@ router.post('/create', async (req, res) => {
 
     // Запись в базу
     await pool.query(
-      'INSERT INTO certificates (name, phone, qr_code_id) VALUES ($1, $2, $3)',
-      [name, phone, qrId]
+      'INSERT INTO certificates (name, phone, qr_code_id, email) VALUES ($1, $2, $3, $4)',
+      [name, phone, qrId, email]
     );
 
     res.status(201).json({
@@ -69,5 +69,6 @@ router.post('/create', async (req, res) => {
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
+
 
 module.exports = router;
