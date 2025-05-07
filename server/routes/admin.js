@@ -90,6 +90,56 @@ router.post("/certificates", async (req, res) => {
     }
   });
   
-  
+  // -------- Новости --------
+
+// Получить все новости
+router.get("/news", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM news ORDER BY created_at DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка при загрузке новостей" });
+  }
+});
+
+// Добавить новость
+router.post("/news", async (req, res) => {
+  const { title, content, image_url } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO news (title, content, image_url) VALUES ($1, $2, $3) RETURNING *",
+      [title, content, image_url]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка при добавлении новости" });
+  }
+});
+
+// Обновить новость
+router.put("/news/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, content, image_url } = req.body;
+  try {
+    const result = await pool.query(
+      "UPDATE news SET title = $1, content = $2, image_url = $3 WHERE id = $4 RETURNING *",
+      [title, content, image_url, id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка при обновлении новости" });
+  }
+});
+
+// Удалить новость
+router.delete("/news/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM news WHERE id = $1", [id]);
+    res.json({ message: "Новость удалена" });
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка при удалении новости" });
+  }
+});
 
 module.exports = router;

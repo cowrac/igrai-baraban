@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const News = () => (
-  <section id="news" className="section news">
-    <h2>Новости</h2>
-    <div className="news-item">
-      <div className="news-img">
-        <img src="/news1.jpg" alt="Новость 1" />
-      </div>
-      <div className="news-text">
-        <h3>Открытие нового филиала</h3>
-        <p>С радостью сообщаем, что мы открыли новый филиал школы в центре города. Записывайтесь уже сейчас!</p>
-      </div>
-    </div>
-    <div className="news-item">
-      <div className="news-img">
-        <img src="/news2.jpg" alt="Новость 2" />
-      </div>
-      <div className="news-text">
-        <h3>Летний мастер-класс</h3>
-        <p>В июле пройдёт бесплатный мастер-класс от наших преподавателей. Места ограничены!</p>
-      </div>
-    </div>
-  </section>
-);
+const News = () => {
+  const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/news")
+      .then(res => res.json())
+      .then(data => {
+        setNewsList(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Ошибка загрузки новостей:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <section id="news" className="section news"><p>Загрузка новостей...</p></section>;
+  }
+
+  return (
+    <section id="news" className="section news">
+      <h2>Новости</h2>
+      {newsList.length === 0 ? (
+        <p>Новостей пока нет.</p>
+      ) : (
+        newsList.map(news => (
+          <div className="news-item" key={news.id}>
+            <div className="news-img">
+              <img src={news.image_url || "/placeholder.jpg"} alt={news.title} />
+            </div>
+            <div className="news-text">
+              <h3>{news.title}</h3>
+              <p>{news.content}</p>
+              <small>{new Date(news.created_at).toLocaleDateString()}</small>
+            </div>
+          </div>
+        ))
+      )}
+    </section>
+  );
+};
 
 export default News;

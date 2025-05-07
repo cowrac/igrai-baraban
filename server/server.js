@@ -5,6 +5,7 @@ const fs = require("fs");
 
 const certificateRoutes = require("./routes/certificate");
 const adminRoutes = require("./routes/admin");
+const newsRoutes = require("./routes/news");
 
 const app = express();
 const PORT = 5000;
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/certificates", certificateRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/news", newsRoutes);
 
 app.use("/certificates", express.static(path.join(__dirname, "certificates")));
 
