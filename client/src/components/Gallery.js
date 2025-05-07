@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "../Gallery.css"; // подключим стили, если нужно
+import "../Gallery.css";
 
 const allPhotos = [
-  "/gallery1.jpg",
-  "/gallery2.jpg",
-  "/gallery3.jpg",
-  "/gallery4.jpg",
-  "/gallery5.jpg",
+  "/gallery/gallery1.jpg",
+  "/gallery/gallery2.jpg",
+  "/gallery/gallery3.jpg",
+  "/gallery/gallery4.jpg",
+  "/gallery/gallery5.jpg",
 ];
 
 const Gallery = () => {
@@ -14,7 +14,7 @@ const Gallery = () => {
 
   return (
     <section id="gallery" className="section">
-      <h2>Галерея</h2>
+      <h2>ГАЛЕРЕЯ</h2>
 
       <div className="gallery-grid">
         {allPhotos.slice(0, 3).map((src, index) => (
@@ -22,7 +22,7 @@ const Gallery = () => {
         ))}
       </div>
 
-      <button onClick={() => setIsModalOpen(true)}>Больше фото</button>
+      <button className="gallery-button" onClick={() => setIsModalOpen(true)}>БОЛЬШЕ ФОТО</button>
 
       {isModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
@@ -30,10 +30,12 @@ const Gallery = () => {
             <h3>Все фотографии</h3>
             <div className="modal-gallery-grid">
               {allPhotos.map((src, index) => (
-                <img key={index} src={src} alt={`Фото ${index + 1}`} />
+                <a key={index} href={src} target="_blank" rel="noopener noreferrer">
+                  <img src={src} alt={`Фото ${index + 1}`} className="modal-thumbnail" />
+                </a>
               ))}
             </div>
-            <button onClick={() => setIsModalOpen(false)}>Закрыть</button>
+            <button className="gallery-button" onClick={() => setIsModalOpen(false)}>Закрыть</button>
           </div>
         </div>
       )}

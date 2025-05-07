@@ -34,39 +34,38 @@ const BuyCertificateModal = ({ onClose }) => {
   return (
     <div className="modal-backdrop">
       <div className="modal">
-        <h2>Купить сертификат</h2>
+        <h2>Ваши данные</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Имя:
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              placeholder="Ваше имя"
               required
             />
           </label>
           <label>
-            Email:
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
           </label>
           <label>
-            Телефон:
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               pattern="^\+?\d{10,15}$"
-              placeholder="+79991234567"
+              placeholder="Номер телефона (+7)"
               required
             />
           </label>
           <button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Отправка..." : "Отправить"}
+            {status === "loading" ? "Отправка..." : "Перейти к оплате"}
           </button>
           <button type="button" onClick={onClose}>Отмена</button>
         </form>

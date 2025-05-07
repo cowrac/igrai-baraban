@@ -87,11 +87,11 @@ function AdminPanel() {
   return (
     <div className="admin-panel">
       <h2>Панель администратора</h2>
-      <button onClick={handleLogout}>Выйти</button>
 
       <div className="panel-links">
         <button onClick={() => setSection("certificates")}>Сертификаты</button>
         <button onClick={() => setSection("news")}>Новости</button>
+        <button onClick={handleLogout}>Выйти</button>
         {/* Здесь можно добавить кнопки "О нас", "Галерея" и т.д. */}
       </div>
 
@@ -185,9 +185,18 @@ function AdminPanel() {
                       {editingId === cert.id ? (
                         <button onClick={() => handleEdit(cert.id)}>Сохранить</button>
                       ) : (
-                        <button onClick={() => setEditingId(cert.id)}>Редактировать</button>
+                        <button className="redact-button" onClick={() => setEditingId(cert.id)}>Редактировать</button>
                       )}
-                      <button onClick={() => handleDelete(cert.id)}>Удалить</button>
+                      <button
+                        onClick={() => {
+                          if (window.confirm("Вы уверены, что хотите удалить этот сертификат?")) {
+                            handleDelete(cert.id);
+                          }
+                        }}
+                      >
+                      Удалить
+                      </button>
+
                     </td>
                   </tr>
                 ))}

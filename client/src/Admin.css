@@ -1,11 +1,17 @@
 .admin-login,
 .admin-panel {
-  max-width: 400px;
+  max-width: 50rem;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background: #f9f9f9;
+  color: black;
+}
+
+.admin-login, .admin-panel h2 {
+  font-size: 40px;
+  color: black;
 }
 
 .admin-login input,
@@ -16,6 +22,11 @@
   margin-top: 10px;
   font-size: 1rem;
 }
+
+.admin-login input {
+  width: 94%;
+}
+
 
 .error {
   color: red;
@@ -33,7 +44,6 @@
   text-decoration: underline;
 }
 
-/* src/Admin.css */
 .admin-panel table {
     width: 100%;
     border-collapse: collapse;
@@ -53,6 +63,8 @@
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 3px;
+    margin-right: 3px;
   }
   
   .admin-panel button:hover {
@@ -69,4 +81,8 @@
     padding: 6px;
     width: 150px;
   }
-  
+
+  .newsform {
+    display: flex;
+    gap: 0.5rem;
+  }

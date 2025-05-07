@@ -2,12 +2,12 @@ import React from "react";
 
 const Header = () => (
   <header className="header">
-    <div className="logo">🎵 Drum School</div>
+    <img className="logo" src="../logo.png"></img>
     <nav>
-      <a href="#main">Главная</a>
-      <a href="#about">О нас</a>
-      <a href="#news">Новости</a>
-      <a href="#gallery">Галерея</a>
+      <a href="#main">ГЛАВНАЯ</a>
+      <a href="#about">О НАС</a>
+      <a href="#news">НОВОСТИ</a>
+      <a href="#gallery">ГАЛЕРЕЯ</a>
     </nav>
   </header>
 );

@@ -23,7 +23,7 @@ const News = () => {
 
   return (
     <section id="news" className="section news">
-      <h2>Новости</h2>
+      <h2>НОВОСТИ</h2>
       {newsList.length === 0 ? (
         <p>Новостей пока нет.</p>
       ) : (
@@ -34,7 +34,7 @@ const News = () => {
             </div>
             <div className="news-text">
               <h3>{news.title}</h3>
-              <p>{news.content}</p>
+              <p className="news-content">{news.content}</p>
               <small>{new Date(news.created_at).toLocaleDateString()}</small>
             </div>
           </div>

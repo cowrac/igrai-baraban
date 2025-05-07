@@ -60,7 +60,7 @@ function AdminNews() {
   return (
     <div className="admin-news">
       <h3>Новости</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="newsform">
         <input
           name="title"
           placeholder="Заголовок"
@@ -81,7 +81,7 @@ function AdminNews() {
           value={formData.image_url}
           onChange={handleChange}
         />
-        <button type="submit">{formData.id ? "Обновить" : "Добавить"}</button>
+        <button type="submit">{formData.id ? "Обновить/Сохранить" : "Добавить"}</button>
       </form>
 
       <ul className="news-list">
@@ -94,8 +94,16 @@ function AdminNews() {
               </div>
             )}
             <div className="news-actions">
-              <button onClick={() => handleEdit(item)}>✏️</button>
-              <button onClick={() => handleDelete(item.id)}>🗑️</button>
+              <button onClick={() => handleEdit(item)}>Редактировать</button>
+              <button
+                onClick={() => {
+                  if (window.confirm("Вы уверены, что хотите удалить этот пост?")) {
+                    handleDelete(item.id);
+                  }
+                }}
+              >
+                Удалить
+              </button>
             </div>
           </li>
         ))}

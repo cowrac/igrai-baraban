@@ -1,34 +1,66 @@
-.modal-backdrop {
+
+  .modal-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .modal-gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .modal-thumbnail {
+    width: 120px;         
+    height: 90px;         
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.2s;
+  }
+  
+  .modal-thumbnail:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
+  .modal-gallery {
+    background: rgb(0, 0, 0);
+    padding: 20px;
+    max-height: 85vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 800px;
+  }
+
+  .modal-gallery h3 {
+    font-size: 60px;
+    margin-top: -1rem;
+  }
+  
+  .modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
   }
   
-  .modal-gallery {
-    background: white;
-    padding: 20px;
-    max-width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
+  .gallery-button {
     border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-family: "Advent Pro", sans-serif;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    background:transparent;
+    border:none;
+    text-decoration-line: underline;
   }
-  
-  .modal-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-  }
-  
-  .modal-gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-  }
-  
