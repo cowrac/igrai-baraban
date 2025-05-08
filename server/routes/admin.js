@@ -35,60 +35,60 @@ router.post("/login", async (req, res) => {
 
 // GET /api/admin/certificates
 router.get("/certificates", async (req, res) => {
-    try {
-      const result = await pool.query("SELECT * FROM certificates ORDER BY created_at DESC");
-      res.json(result.rows);
-    } catch (err) {
-      console.error("Ошибка при получении сертификатов", err);
-      res.status(500).json({ error: "Ошибка сервера" });
-    }
-  });
-  
-  // DELETE /api/admin/certificates/:id
-  router.delete("/certificates/:id", async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      await pool.query("DELETE FROM certificates WHERE id = $1", [id]);
-      res.status(200).json({ message: "Сертификат удалён" });
-    } catch (err) {
-      console.error("Ошибка при удалении сертификата", err);
-      res.status(500).json({ error: "Ошибка сервера" });
-    }
-  });
+  try {
+    const result = await pool.query("SELECT * FROM certificates ORDER BY created_at DESC");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Ошибка при получении сертификатов", err);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
 
-  // POST /api/admin/certificates — Добавить сертификат вручную
+// DELETE /api/admin/certificates/:id
+router.delete("/certificates/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await pool.query("DELETE FROM certificates WHERE id = $1", [id]);
+    res.status(200).json({ message: "Сертификат удалён" });
+  } catch (err) {
+    console.error("Ошибка при удалении сертификата", err);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
+
+// POST /api/admin/certificates — Добавить сертификат вручную
 router.post("/certificates", async (req, res) => {
-    const { name, email, phone, qr_code_id } = req.body;
-  
-    try {
-      const result = await pool.query(
-        "INSERT INTO certificates (name, email, phone, qr_code_id) VALUES ($1, $2, $3, $4) RETURNING *",
-        [name, email, phone, qr_code_id]
-      );
-      res.status(201).json(result.rows[0]);
-    } catch (err) {
-      console.error("Ошибка при добавлении сертификата:", err);
-      res.status(500).json({ error: "Ошибка сервера" });
-    }
-  });
-  
-  // PUT /api/admin/certificates/:id — Обновить сертификат
-  router.put("/certificates/:id", async (req, res) => {
-    const { id } = req.params;
-    const { name, email, phone, qr_code_id } = req.body;
-  
-    try {
-      const result = await pool.query(
-        "UPDATE certificates SET name=$1, email=$2, phone=$3, qr_code_id=$4 WHERE id=$5 RETURNING *",
-        [name, email, phone, qr_code_id, id]
-      );
-      res.json(result.rows[0]);
-    } catch (err) {
-      console.error("Ошибка при обновлении сертификата:", err);
-      res.status(500).json({ error: "Ошибка сервера" });
-    }
-  });
+  const { name, email, phone, qr_code_id } = req.body;
+
+  try {
+    const result = await pool.query(
+      "INSERT INTO certificates (name, email, phone, qr_code_id, used) VALUES ($1, $2, $3, $4, false) RETURNING *",
+      [name, email, phone, qr_code_id]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Ошибка при добавлении сертификата:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
+
+// PUT /api/admin/certificates/:id — Обновить сертификат
+router.put("/certificates/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, email, phone, qr_code_id, used } = req.body;
+
+  try {
+    const result = await pool.query(
+      "UPDATE certificates SET name=$1, email=$2, phone=$3, qr_code_id=$4, used=$5 WHERE id=$6 RETURNING *",
+      [name, email, phone, qr_code_id, used, id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Ошибка при обновлении сертификата:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
   
   // -------- Новости --------
 

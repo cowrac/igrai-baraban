@@ -86,3 +86,7 @@
     display: flex;
     gap: 0.5rem;
   }
+
+  .input-edit {
+    max-width: 6rem;
+  }

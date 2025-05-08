@@ -7,7 +7,9 @@ function AdminPanel() {
   const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
-  const [newCert, setNewCert] = useState({ name: "", email: "", phone: "", qr_code_id: "" });
+  const [newCert, setNewCert] = useState({
+    name: "", email: "", phone: "", qr_code_id: "", used: false
+  });
 
   const token = localStorage.getItem("adminToken");
 
@@ -51,7 +53,7 @@ function AdminPanel() {
     if (response.ok) {
       const created = await response.json();
       setCertificates([created, ...certificates]);
-      setNewCert({ name: "", email: "", phone: "", qr_code_id: "" });
+      setNewCert({ name: "", email: "", phone: "", qr_code_id: "", used: false });
     }
   };
 
@@ -92,7 +94,6 @@ function AdminPanel() {
         <button onClick={() => setSection("certificates")}>Сертификаты</button>
         <button onClick={() => setSection("news")}>Новости</button>
         <button onClick={handleLogout}>Выйти</button>
-        {/* Здесь можно добавить кнопки "О нас", "Галерея" и т.д. */}
       </div>
 
       {section === "certificates" && (
@@ -134,6 +135,7 @@ function AdminPanel() {
                   <th>Телефон</th>
                   <th>Номер сертификата</th>
                   <th>Дата</th>
+                  <th>Использован?</th>
                   <th>Действия</th>
                 </tr>
               </thead>
@@ -143,6 +145,7 @@ function AdminPanel() {
                     <td>
                       {editingId === cert.id ? (
                         <input
+                          className="input-edit"
                           value={cert.name}
                           onChange={(e) => updateCertField(cert.id, "name", e.target.value)}
                         />
@@ -153,6 +156,7 @@ function AdminPanel() {
                     <td>
                       {editingId === cert.id ? (
                         <input
+                          className="input-edit"
                           value={cert.email}
                           onChange={(e) => updateCertField(cert.id, "email", e.target.value)}
                         />
@@ -163,6 +167,7 @@ function AdminPanel() {
                     <td>
                       {editingId === cert.id ? (
                         <input
+                          className="input-edit"
                           value={cert.phone}
                           onChange={(e) => updateCertField(cert.id, "phone", e.target.value)}
                         />
@@ -173,6 +178,7 @@ function AdminPanel() {
                     <td>
                       {editingId === cert.id ? (
                         <input
+                          className="input-edit"
                           value={cert.qr_code_id}
                           onChange={(e) => updateCertField(cert.id, "qr_code_id", e.target.value)}
                         />
@@ -181,6 +187,17 @@ function AdminPanel() {
                       )}
                     </td>
                     <td>{new Date(cert.created_at).toLocaleString()}</td>
+                    <td>
+                      {editingId === cert.id ? (
+                        <input
+                          type="checkbox"
+                          checked={cert.used}
+                          onChange={(e) => updateCertField(cert.id, "used", e.target.checked)}
+                        />
+                      ) : (
+                        cert.used ? "✅" : "❌"
+                      )}
+                    </td>
                     <td>
                       {editingId === cert.id ? (
                         <button onClick={() => handleEdit(cert.id)}>Сохранить</button>
@@ -194,9 +211,8 @@ function AdminPanel() {
                           }
                         }}
                       >
-                      Удалить
+                        Удалить
                       </button>
-
                     </td>
                   </tr>
                 ))}
