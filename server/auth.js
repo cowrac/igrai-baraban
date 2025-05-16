@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "your_super_secret"; // Из .env, если хочешь
+const JWT_SECRET = "super_secret"; // bruh
 
 function checkAuth(req, res, next) {
   const authHeader = req.headers.authorization;
